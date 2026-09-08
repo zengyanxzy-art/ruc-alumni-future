@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#8f0d1b">
+<title>人大校友未来共同行动｜本期回馈 · 原型 V2</title>
+<style>
+:root{
+  --red:#8f0d1b; --ink:#171717; --muted:#6e6965; --paper:#f7f3ec; --white:#fffdfa;
+  --line:rgba(23,23,23,.12); --max:1180px; --ease:cubic-bezier(.2,.75,.2,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory;background:var(--paper)}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--paper);overflow-x:hidden}
+a{color:inherit;text-decoration:none}.accent{color:var(--red)}
+.section{position:relative;min-height:100svh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;overflow:hidden;padding:clamp(70px,8vw,110px) clamp(22px,5vw,72px);isolation:isolate}
+.section::before{content:"";position:absolute;inset:-20%;z-index:-3;background:radial-gradient(circle at 12% 22%,rgba(143,13,27,.075),transparent 26%),radial-gradient(circle at 88% 75%,rgba(143,13,27,.045),transparent 30%)}
+.section.dark{color:#fff9f4;background:radial-gradient(circle at 18% 20%,rgba(255,255,255,.08),transparent 25%),linear-gradient(145deg,#780b16 0%,#9a101f 46%,#5f0710 100%)}
+.section.ink{background:#161616;color:#fffaf4}.section.cream{background:linear-gradient(180deg,#fbf8f3 0%,#f1e9de 100%)}
+.wrap{width:min(100%,var(--max));margin:0 auto;position:relative;z-index:2}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:22px}.dark .eyebrow,.ink .eyebrow{color:#f1c5ca}
+h1,h2,h3,p{margin:0}h1{font-size:clamp(48px,7vw,104px);line-height:1.02;letter-spacing:-.035em;font-weight:800;max-width:1000px}h2{font-size:clamp(38px,5.4vw,76px);line-height:1.08;letter-spacing:-.025em;font-weight:790;max-width:1000px}
+.lead{margin-top:28px;max-width:760px;font-size:clamp(19px,2vw,28px);line-height:1.65;color:var(--muted)}.dark .lead,.ink .lead{color:rgba(255,249,244,.78)}
+.hero-kicker{margin-top:34px;font-size:clamp(20px,2.2vw,31px);font-weight:650;color:var(--red)}.dark .hero-kicker,.ink .hero-kicker{color:#ffd1d7}
+.ghost-90{position:absolute;right:-2vw;bottom:-9vw;font-size:clamp(190px,34vw,560px);line-height:.8;font-weight:900;color:rgba(143,13,27,.055);letter-spacing:-.08em;user-select:none;z-index:-1}
+.vision-grid{margin-top:50px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:980px}.vision{padding:28px 30px 30px;border-top:1px solid var(--line);background:rgba(255,255,255,.36);min-height:150px}.vision strong{display:block;font-size:clamp(24px,2.7vw,38px);margin-bottom:12px}.vision span{color:var(--muted);font-size:16px;line-height:1.7}
+.statement{display:flex;align-items:flex-end;gap:clamp(20px,5vw,80px)}.statement .big{font-size:clamp(72px,15vw,220px);font-weight:900;line-height:.82;letter-spacing:-.075em;color:var(--red)}.statement .copy{max-width:660px;padding-bottom:8px}.statement .copy h3{font-size:clamp(30px,4vw,58px);line-height:1.12;margin-bottom:14px}.statement .copy p{font-size:clamp(17px,1.8vw,24px);line-height:1.65;color:var(--muted)}
+.network{margin-top:56px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.pill{border:1px solid rgba(143,13,27,.25);color:var(--red);padding:11px 16px;border-radius:999px;font-weight:700;font-size:14px;background:rgba(255,255,255,.5)}
+.money{font-size:clamp(82px,16vw,230px);line-height:.85;font-weight:900;letter-spacing:-.07em;color:var(--red);margin:18px 0 24px}.money small{font-size:.3em;letter-spacing:-.02em;margin-left:.12em}
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:42px;max-width:900px}.principle{padding:22px 24px;border-left:3px solid var(--red);background:rgba(255,255,255,.52)}.principle b{display:block;font-size:20px;margin-bottom:8px}.principle span{color:var(--muted);line-height:1.55;font-size:14px}
+.value-grid{margin-top:54px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.value{padding:26px 22px 28px;border-top:1px solid rgba(255,255,255,.2);min-height:210px;background:rgba(255,255,255,.04)}.value .num{font-size:13px;opacity:.52;letter-spacing:.12em;margin-bottom:28px}.value strong{display:block;font-size:clamp(24px,2.6vw,36px);margin-bottom:14px}.value span{display:block;color:rgba(255,255,255,.68);line-height:1.65;font-size:15px}
+.timeline{position:relative;margin-top:64px;height:120px;max-width:980px}.timeline .line{position:absolute;left:0;right:0;top:52px;height:2px;background:linear-gradient(90deg,rgba(143,13,27,.2),var(--red),rgba(143,13,27,.08))}.timeline .dot{position:absolute;top:43px;width:20px;height:20px;border-radius:50%;border:4px solid var(--paper);background:var(--red)}.timeline .dot.start{left:0}.timeline .dot.now{left:78%}.timeline .year{position:absolute;top:0;font-weight:800;font-size:18px;color:var(--red)}.timeline .year.start{left:0}.timeline .year.now{left:78%;transform:translateX(-18%)}.timeline .future{position:absolute;top:72px;right:0;color:var(--muted);font-size:14px;letter-spacing:.08em}
+.cta{display:flex;flex-direction:column;align-items:flex-start;gap:26px}.cta .quote{font-size:clamp(22px,2.8vw,38px);line-height:1.45;max-width:780px;color:rgba(255,255,255,.82)}.cta-btn{margin-top:8px;border:none;cursor:pointer;border-radius:999px;padding:17px 26px;font-weight:800;background:#fff7ef;color:#7b0b16}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:18px clamp(18px,4vw,52px);pointer-events:none}.brand{font-weight:800;font-size:14px}.proto{font-size:12px;color:var(--muted)}
+.dots{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:45;display:flex;flex-direction:column;gap:10px}.dots a{width:8px;height:8px;border-radius:50%;background:rgba(23,23,23,.22);transition:.25s var(--ease)}.dots a.active{height:28px;border-radius:999px;background:var(--red)}
+.scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.16em;color:rgba(23,23,23,.46);display:flex;flex-direction:column;align-items:center;gap:8px}.scroll-cue::after{content:"";width:1px;height:26px;background:currentColor;opacity:.5}
+dialog{width:min(92vw,560px);border:none;border-radius:24px;padding:0;box-shadow:0 30px 100px rgba(0,0,0,.32);background:#fffaf4;color:var(--ink)}dialog::backdrop{background:rgba(10,10,10,.52);backdrop-filter:blur(4px)}.dialog-inner{padding:28px}.dialog-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}.dialog-head h3{font-size:28px}.close{border:none;background:transparent;cursor:pointer;font-size:26px}.note{color:var(--muted);line-height:1.6;font-size:14px;margin-bottom:16px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-size:13px;font-weight:700;display:block;margin-bottom:6px}input,textarea{width:100%;border:1px solid rgba(23,23,23,.15);background:#fff;border-radius:12px;padding:12px 13px}textarea{min-height:90px}.full{grid-column:1/-1}.fake-submit{margin-top:14px;width:100%;border:none;border-radius:12px;padding:13px 16px;background:var(--red);color:white;font-weight:800}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .85s var(--ease),transform .85s var(--ease)}.section.active .fade{opacity:1;transform:none}.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}
+@media(max-width:900px){html{scroll-snap-type:y proximity}.section{padding:80px 22px 56px}.vision-grid{grid-template-columns:1fr;gap:10px;margin-top:32px}.vision{min-height:auto;padding:20px}.statement{align-items:flex-start;flex-direction:column;gap:22px}.principles{grid-template-columns:1fr;margin-top:28px}.value-grid{grid-template-columns:1fr 1fr;margin-top:34px}.value{min-height:170px}.dots{right:10px}.topbar{padding:14px 18px}.proto{display:none}}
+@media(max-width:560px){h1{font-size:clamp(44px,13vw,68px)}h2{font-size:clamp(36px,10vw,54px)}.lead{font-size:18px}.value-grid{grid-template-columns:1fr}.value{min-height:auto;padding:20px 18px}.money{font-size:26vw}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.timeline .year.now,.timeline .dot.now{left:70%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.fade{opacity:1;transform:none}}
+/* V2: an invitation in three chapters */
+.section{overflow:visible;min-height:100svh}
+.section::before{inset:0;pointer-events:none}
+.ghost-90{right:0;bottom:0}
+.dark .accent{color:#ffd1d7}
+.topbar{color:var(--ink);background:linear-gradient(var(--paper),transparent);padding-bottom:30px;transition:color .2s}
+.on-dark .topbar{color:#fff9f4;background:linear-gradient(rgba(18,12,12,.6),transparent)}
+.on-dark .proto{color:#e2cfd0}.on-dark .scroll-cue{color:#ecd7d9}
+.dots{right:14px;gap:0}.dots a{width:24px;height:26px;background:none;border-radius:0;display:grid;place-items:center}
+.dots a::after{content:"";width:5px;height:5px;border-radius:50%;background:#a49c95}
+.dots a.active{height:26px;background:none}.dots a.active::after{height:17px;border-radius:5px;background:var(--red)}
+.on-dark .dots a.active::after{background:#f4ced1}
+.page-count{position:fixed;bottom:22px;right:24px;font-size:11px;letter-spacing:.14em;z-index:45;color:var(--muted)}
+.on-dark .page-count{color:#dfcace}
+.return-layout{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(38px,7vw,100px);align-items:center}
+.returns h2{font-size:clamp(40px,4.6vw,68px);font-weight:650;line-height:1.2;letter-spacing:.01em}
+.returns .lead{font-size:clamp(18px,1.6vw,23px);line-height:1.75;margin-top:24px}
+.return-copy{font-size:16px;line-height:1.9;color:#bcb6b0;max-width:430px;margin-top:28px}
+.honor{margin:0;position:relative;padding:32px 34px 28px;background:linear-gradient(120deg,#e8dcc5,#f9f0dd 52%,#e4d3b3);color:#3f3021;box-shadow:0 24px 60px #0004;border:1px solid #baa17e}
+.honor-top{display:flex;justify-content:space-between;gap:14px;font-size:11px;letter-spacing:.06em}
+.honor-top span{color:#76634c}.honor-rule{height:1px;background:#b6a083;margin:24px 0 29px}
+.honor-sub{font-size:12px;letter-spacing:.15em;color:#76634c}
+.honor h3{font-family:"Songti SC","SimSun",serif;font-size:clamp(28px,3vw,44px);font-weight:400;letter-spacing:.12em;margin:12px 0 30px}
+.honor-name{font-size:21px;letter-spacing:.18em}.honor-name span{display:block;font-size:11px;letter-spacing:.04em;margin-top:9px;color:#76634c}
+.honor-bottom{margin-top:27px;border-top:1px solid #b6a083;padding-top:16px;display:flex;justify-content:space-between;gap:12px;font-size:10px;color:#76634c}
+.honor figcaption{position:absolute;top:calc(100% + 15px);left:0;color:#bcb6b0;font-size:11px;letter-spacing:.03em;line-height:1.6}
+.courses{display:grid;grid-template-columns:1fr 1fr;gap:8%;margin-top:36px}
+.courses article{border-top:1px solid #c9b9a7;padding-top:20px}
+.course-mark{font-size:11px;letter-spacing:.13em;color:var(--red);margin-bottom:16px}
+.courses h3{font-size:clamp(27px,3vw,40px);line-height:1.3;font-weight:600}
+.courses p{font-size:16px;line-height:1.8;color:var(--muted);max-width:410px;margin-top:16px}
+.return-foot{font-size:14px;color:var(--muted);margin-top:32px}
+.growth-story{position:relative;padding-top:30px}.growth-word{position:absolute;right:0;top:-50px;font-family:"SimSun",serif;font-size:130px;color:rgba(143,13,27,.055);pointer-events:none}
+.growth-story h3{font-size:30px;font-weight:600;position:relative}.growth-story>p{margin-top:16px;font-size:17px;line-height:1.8;color:var(--muted);max-width:380px}
+.growth-line{border-top:1px solid var(--line);padding-top:18px;margin-top:22px;display:grid;grid-template-columns:90px 1fr;gap:18px}
+.growth-line span{font-size:17px;color:var(--red)}.growth-line p{font-size:15px;line-height:1.7;color:var(--muted)}
+.programme-note{position:absolute;bottom:35px;left:max(5vw,22px);right:50px;color:var(--muted);font-size:11px;line-height:1.6}
+button,input,textarea{font:inherit}button{min-height:44px}a:focus-visible,button:focus-visible{outline:2px solid #b47356;outline-offset:5px}
+dialog{max-height:90svh;overflow-y:auto}.fade{opacity:1;transform:none}
+@media(min-width:901px) and (max-height:760px){.section{padding-top:78px;padding-bottom:65px}h1{font-size:74px}h2{font-size:55px}.vision-grid{margin-top:26px}.vision{padding:20px;min-height:125px}.statement .big{font-size:140px}.statement .copy h3{font-size:42px}.money{font-size:155px}.principles{margin-top:26px}.network{margin-top:30px}}
+@media(max-width:900px){.section{padding:85px 36px 64px 24px}.return-layout{grid-template-columns:1fr;gap:34px}.returns h2{font-size:clamp(37px,7vw,54px)}.return-copy{margin-top:20px;max-width:560px}.honor{max-width:500px;width:100%;margin-bottom:26px}.courses{gap:30px}.programme-note{position:static;margin-top:34px;max-width:540px}.section#growth{display:flex;flex-direction:column;align-items:flex-start;justify-content:center}.growth-story{padding-top:0}.growth-word{font-size:100px;top:-15px}.growth-line{margin-top:18px}.page-count{right:16px;bottom:16px}.dots{right:3px}.topbar{padding-left:24px}.returns .lead{margin-top:18px}.return-foot{margin-top:26px}}
+@media(max-width:560px){.brand{font-size:12px}.section{padding:76px 32px 54px 22px}.return-layout{gap:28px}.returns h2{font-size:38px;line-height:1.22}.returns .lead{font-size:17px}.return-copy{font-size:14px;line-height:1.85;margin-top:17px}.honor{padding:23px 22px 21px}.honor-rule{margin:18px 0 21px}.honor h3{font-size:30px;margin:11px 0 23px}.honor-top{font-size:10px}.honor-name{font-size:18px}.honor-bottom{font-size:9px;margin-top:23px}.honor figcaption{font-size:10px;top:calc(100% + 12px)}.courses{grid-template-columns:1fr;gap:23px;margin-top:26px}.courses article{padding-top:16px}.courses h3{font-size:26px}.courses h3 br{display:none}.courses p{font-size:15px;margin-top:10px}.course-mark{margin-bottom:10px}.return-foot{font-size:12px}.growth-story h3{font-size:25px}.growth-story>p{font-size:15px}.growth-line{grid-template-columns:80px 1fr;gap:12px}.growth-line span{font-size:16px}.growth-line p{font-size:14px}.programme-note{margin-top:26px;font-size:10px}.statement .big{font-size:94px}.statement .copy h3{font-size:29px}.network{margin-top:30px;gap:10px}.pill{font-size:12px;padding:9px 12px}.vision-grid{gap:8px;margin-top:25px}.vision{padding:15px 16px}.vision strong{font-size:22px;margin-bottom:8px}.vision span{font-size:14px}.principle{padding:15px 18px}.principle b{font-size:18px}.lead{font-size:17px}.hero-kicker{font-size:20px}.dialog-inner{padding:22px}.dialog-head h3{font-size:24px}input,textarea{font-size:16px}}
+@media(max-width:360px){.returns h2{font-size:34px}.honor-top{letter-spacing:0}.honor{padding:20px 17px}.honor-bottom{gap:8px;letter-spacing:0}.growth-line{grid-template-columns:70px 1fr}h1{font-size:40px}}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="brand">中国人民大学 · 校友共同行动</div><div class="proto">CONCEPT PROTOTYPE · V2</div></div>
+<nav class="dots" aria-label="章节导航"><a href="#s1" aria-label="共同期待" title="共同期待"></a><a href="#s2" aria-label="愿景" title="愿景"></a><a href="#s3" aria-label="共同行动" title="共同行动"></a><a href="#s4" aria-label="首期同行者" title="首期同行者"></a><a href="#s5" aria-label="公益承诺" title="公益承诺"></a><a href="#s6" aria-label="本期回馈：荣誉" title="本期回馈：荣誉"></a><a href="#learning" aria-label="本期回馈：终身学习" title="本期回馈：终身学习"></a><a href="#growth" aria-label="本期回馈：子女成长营" title="本期回馈：子女成长营"></a><a href="#s7" aria-label="九十周年" title="九十周年"></a><a href="#s8" aria-label="参与邀请" title="参与邀请"></a></nav><div class="page-count" aria-hidden="true">01 / 10</div>
+<main>
+<section class="section cream" id="s1" data-i="0">
+  <div class="wrap">
+    <div class="eyebrow fade">A shared expectation</div>
+    <h1 class="fade delay-1">我们都希望看到一个<br><span class="accent">更好的人大。</span></h1>
+    <p class="lead fade delay-2">九十年来，一代又一代人大人从这里出发。无论走了多远，我们依然关心她走向哪里。</p>
+    <div class="hero-kicker fade delay-3">她的下一程，也可以有我们的一份。</div>
+  </div>
+  <div class="ghost-90">90</div>
+  <div class="scroll-cue">SCROLL</div>
+</section>
+
+<section class="section" id="s2" data-i="1">
+  <div class="wrap">
+    <div class="eyebrow fade">What we hope for</div>
+    <h2 class="fade delay-1">我们期待怎样的人大？</h2>
+    <div class="vision-grid">
+      <div class="vision fade delay-1"><strong>汇聚最好的人</strong><span>让优秀的人选择人大，在这里成就重要的事业。</span></div>
+      <div class="vision fade delay-2"><strong>培养最优秀的下一代</strong><span>让有才华的年轻人拥有更大的舞台、更远的视野。</span></div>
+      <div class="vision fade delay-2"><strong>产生真正重要的思想</strong><span>让来自人大的思想持续影响中国，也影响世界。</span></div>
+      <div class="vision fade delay-3"><strong>拥有更大的影响力</strong><span>更加开放、更具创造力，始终站在时代重要问题的前沿。</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark" id="s3" data-i="2">
+  <div class="wrap">
+    <div class="eyebrow fade">RUC needs RUCers</div>
+    <h2 class="fade delay-1">人大向前，<br>也需要<span class="accent">人大人。</span></h2>
+    <p class="lead fade delay-2">这些从人大走出去的人，可以重新汇聚起来。</p>
+    <div class="hero-kicker fade delay-3">把共同的期待，变成共同的行动。</div>
+  </div>
+  <div class="scroll-cue">SCROLL</div>
+</section>
+
+<section class="section cream" id="s4" data-i="3">
+  <div class="wrap">
+    <div class="eyebrow fade">Start with the first group</div>
+    <div class="statement fade delay-1"><div class="big">30</div><div class="copy"><h3>首批联合发起人</h3><p>来自不同年代、不同学院、不同领域，因为对人大的共同期待走到一起。</p></div></div>
+    <div class="statement fade delay-2" style="margin-top:42px;"><div class="big">300</div><div class="copy"><h3>首期参与者</h3><p>由最初的一批人，连接更多人大人，形成长期参与学校发展的校友力量。</p></div></div>
+    <div class="network fade delay-3"><span class="pill">人大人，连接人大人</span><span class="pill">首期300席</span><span class="pill">邀请制 · 推荐制</span></div>
+  </div>
+</section>
+
+<section class="section" id="s5" data-i="4">
+  <div class="wrap">
+    <div class="eyebrow fade">A clear commitment</div>
+    <h2 class="fade delay-1">一份郑重的行动</h2>
+    <div class="money fade delay-2">30<small>万元</small></div>
+    <p class="lead fade delay-2">每位首期参与者，以统一标准支持人大长远发展。</p>
+    <div class="principles">
+      <div class="principle fade delay-1"><b>统一标准</b><span>同一金额、同等身份，让参与更纯粹。</span></div>
+      <div class="principle fade delay-2"><b>尊重边界</b><span>珍视每一次参与，也尊重校友的长期选择。</span></div>
+      <div class="principle fade delay-3"><b>规范管理</b><span>资金统一通过学校教育基金会依法依规管理。</span></div>
+    </div>
+    <div class="hero-kicker fade delay-3" style="margin-top:34px;">300位人大人 · 近亿元公益力量</div>
+  </div>
+</section>
+
+<section class="section ink returns" id="s6">
+ <div class="wrap return-layout">
+  <div><div class="eyebrow">本期回馈 · 壹 / 荣誉</div>
+   <h2>在最初，<br>留下你的名字。</h2>
+   <p class="lead">一张联合发起人的荣誉名片，<br>铭记与你共同开启的这一程。</p>
+   <p class="return-copy">让一份对母校的郑重支持，拥有清晰的身份表达。多年以后回望，依然可以说：那时候，我在其中。</p>
+  </div>
+  <figure class="honor"><div class="honor-top">人大校友共同行动<span>首期 · 荣誉名片</span></div>
+   <div class="honor-rule"></div><p class="honor-sub">与人大，再次同行</p>
+   <h3>联合发起人</h3><div class="honor-name">姓名<span>学院 · 毕业年份</span></div>
+   <div class="honor-bottom">共同发起 · 长期同行<span>始于共同的期待</span></div>
+   <figcaption>身份展示示意 · 授予范围以正式方案为准</figcaption>
+  </figure>
+ </div>
+</section>
+<section class="section cream returns" id="learning">
+ <div class="wrap"><div class="eyebrow">本期回馈 · 贰 / 终身学习</div>
+  <h2>离开校园，<br>思想仍在生长。</h2>
+  <p class="lead">让大学继续成为你认识变化、形成判断的地方。</p>
+  <div class="courses">
+   <article><div class="course-mark">01 / 洞察变化</div><h3>AI驱动的<br>投融资课程</h3><p>以人工智能拓展研究视野，探索技术如何改变投融资分析与决策。</p></article>
+   <article><div class="course-mark">02 / 回到价值</div><h3>价值投资<br>大师课</h3><p>回到企业、价值与时间，在长期视角中深化独立判断。</p></article>
+  </div>
+  <p class="return-foot">与思想相遇，让学习成为一段长期的关系。</p>
+ </div>
+</section>
+<section class="section returns" id="growth">
+ <div class="wrap return-layout"><div><div class="eyebrow">本期回馈 · 叁 / 子女成长营</div>
+  <h2>你的来处，<br>成为他们的<br><span class="accent">新视野。</span></h2>
+  <p class="lead">让下一代走近大学，<br>也更懂得你与人大的缘分。</p>
+ </div><div class="growth-story"><div class="growth-word" aria-hidden="true">向远</div>
+  <h3>子女成长营</h3><p>以一次成长之旅，打开对知识、世界与未来的好奇。</p>
+  <div class="growth-line"><span>走近大学</span><p>感受校园里的求知氛围。</p></div>
+  <div class="growth-line"><span>发现兴趣</span><p>在交流与探索中，认识更多可能。</p></div>
+  <div class="growth-line"><span>望向未来</span><p>带着新的问题，走向自己的下一程。</p></div>
+ </div></div>
+ <p class="programme-note">本期课程与成长营的具体安排，将随正式方案公布。</p>
+</section>
+
+<section class="section cream" id="s7" data-i="6">
+  <div class="wrap">
+    <div class="eyebrow fade">90 years · A new starting point</div>
+    <h2 class="fade delay-1">九十周年，<br>一个新的起点。</h2>
+    <p class="lead fade delay-2">我们回望共同的来处，也一起望向更远的地方。让这一刻重新连接起来的力量，继续走向未来。</p>
+    <div class="timeline fade delay-3"><div class="line"></div><div class="dot start"></div><div class="dot now"></div><div class="year start">过去</div><div class="year now">90周年</div><div class="future">更远的未来 →</div></div>
+    <div class="hero-kicker fade delay-3">从九十周年出发，走向人大的下一程。</div>
+  </div>
+</section>
+
+<section class="section dark" id="s8" data-i="7">
+  <div class="wrap cta">
+    <div class="eyebrow fade">Be among the first</div>
+    <h2 class="fade delay-1">人大曾经塑造了我们。</h2>
+    <div class="quote fade delay-2">今天，我们有机会一起参与她的下一程。</div>
+    <div class="hero-kicker fade delay-2">与人大，再次同行。</div>
+    <button class="cta-btn fade delay-3" id="openDialog">申请成为首期参与者</button>
+  </div>
+</section>
+</main>
+
+<dialog id="joinDialog" aria-labelledby="joinTitle">
+  <div class="dialog-inner">
+    <div class="dialog-head"><div><div class="eyebrow" style="margin-bottom:8px">Expression of interest</div><h3 id="joinTitle">首期参与意向</h3></div><button class="close" id="closeDialog" aria-label="关闭">×</button></div>
+    <p class="note">当前为展示原型，表单不连接后台。正式开放后可在此提交申请。</p>
+    <div class="form-grid">
+      <div><label>姓名</label><input placeholder="请输入姓名"></div>
+      <div><label>毕业年份</label><input placeholder="如：2003"></div>
+      <div><label>学院 / 专业</label><input placeholder="请输入学院或专业"></div>
+      <div><label>所在行业</label><input placeholder="请输入行业"></div>
+      <div class="full"><label>推荐人 / 了解渠道</label><input placeholder="如有，可填写"></div>
+      <div class="full"><label>想对人大说的话</label><textarea placeholder="可选"></textarea></div>
+    </div>
+    <button class="fake-submit" type="button">提交意向（原型）</button><p id="formStatus" class="note" role="status" style="margin-top:12px"></p>
+  </div>
+</dialog>
+
+<script>
+const sections=[...document.querySelectorAll('.section')],dots=[...document.querySelectorAll('.dots a')];
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+let current=0,scheduled=false;
+function update(){scheduled=false;const mid=innerHeight*.48;let next=0;sections.forEach((s,i)=>{if(s.getBoundingClientRect().top<=mid)next=i;});current=next;sections.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)s.classList.add('active');});dots.forEach((d,i)=>{d.classList.toggle('active',i===current);if(i===current)d.setAttribute('aria-current','step');else d.removeAttribute('aria-current');});document.body.classList.toggle('on-dark',sections[current].matches('.dark,.ink'));document.querySelector('.page-count').textContent=String(current+1).padStart(2,'0')+' / 10';}
+addEventListener('scroll',()=>{if(!scheduled){scheduled=true;requestAnimationFrame(update);}}, {passive:true});addEventListener('resize',update);update();
+const dialog=document.getElementById('joinDialog');
+document.getElementById('openDialog').addEventListener('click',()=>dialog.showModal());
+document.getElementById('closeDialog').addEventListener('click',()=>dialog.close());
+document.querySelector('.fake-submit').addEventListener('click',()=>{document.getElementById('formStatus').textContent='这是意向表单预览，信息未发送。正式开放后可在此提交申请。';});
+document.querySelectorAll('.form-grid input,.form-grid textarea').forEach((el,i)=>{el.id='join-'+i;el.previousElementSibling.htmlFor=el.id;});
+addEventListener('keydown',e=>{if(dialog.open||e.altKey||e.ctrlKey||e.metaKey||e.target.matches('input,textarea,select,button'))return;const r=sections[current].getBoundingClientRect();let next=current;if(['ArrowDown','PageDown'].includes(e.key)){if(r.bottom>innerHeight+2)return;next=Math.min(current+1,sections.length-1);}else if(['ArrowUp','PageUp'].includes(e.key)){if(r.top< -2)return;next=Math.max(0,current-1);}else return;e.preventDefault();sections[next].scrollIntoView({behavior:reduced.matches?'instant':'smooth'});});
+</script>
+</body>
+</html>
